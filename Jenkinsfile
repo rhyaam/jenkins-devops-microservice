@@ -29,4 +29,17 @@ pipeline {
 			}
 		}
 	}
+	post{
+		always{
+			echo "Script always run"
+
+		}
+		sucess{
+			echo "Build is always a sucess"
+
+		}
+		failure{
+			echo "Build Fails"
+		}
+	}
 }
