@@ -34,7 +34,7 @@ pipeline {
 			echo "Script always run"
 
 		}
-		sucess{
+		success{
 			echo "Build is always a sucess"
 
 		}
