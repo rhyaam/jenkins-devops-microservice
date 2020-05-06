@@ -1,21 +1,7 @@
-// node {
-// 	stage('Build') {
-// 		echo "Build"
-// 	}
-// 	stage('Test') {
-// 		echo "Test"
-// 	}
-// 	stage('Integration Test') {
-// 		echo "IntegrationTest"
-// 	}
-// }
-
 pipeline {
 	agent any
-
 	// agent { docker { image "maven:3.6.3" } }
 	// agent { docker { image 'node:13.8' }	}
-
 	environment{
 	dockerHome = tool 'myDocker'
 	mavenHome = tool 'myMaven'
@@ -82,7 +68,7 @@ pipeline {
 		}
 	}
 
-	post{
+	post {
 		always{
 			echo "Script always run"
 
