@@ -51,7 +51,7 @@ pipeline {
 			steps{
 				//docker build -t "rhyaam/rhyaam/jenkins-devops-microservice:$env.BUILD_TAG"
 				script {
-					docker.build ("rhyaam/jenkins-devops-microservice:${env.BUILD_TAG}");
+					dockerImage= docker.build ("rhyaam/jenkins-devops-microservice:${env.BUILD_TAG}");
 				}
 			}
 		}
