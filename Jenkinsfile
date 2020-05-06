@@ -63,9 +63,9 @@ pipeline {
 
 		stage('Build Docker Image'){
 			steps{
-				//docker build -t "rhyaam/azure-devops-kubernetes-terraform-pipeline:$env.BUILD_TAG"
-			script {
-				docker.build ("rhyaam/azure-devops-kubernetes-terraform-pipeline:{$env.BUILD_TAG}")
+				//docker build -t "rhyaam/rhyaam/jenkins-devops-microservice:$env.BUILD_TAG"
+				script {
+					docker.build ("rhyaam/jenkins-devops-microservice:${env.BUILD_TAG}")
 				}
 			}
 		}
