@@ -51,7 +51,7 @@ pipeline {
 			steps{
 				//docker build -t "rhyaam/rhyaam/jenkins-devops-microservice:$env.BUILD_TAG"
 				script {
-					docker.build ("rhyaam/jenkins-devops-microservice:${env.BUILD_TAG}")
+					docker.build ("rhyaam/jenkins-devops-microservice:${env.BUILD_TAG}");
 				}
 			}
 		}
@@ -60,8 +60,8 @@ pipeline {
 			steps {
 				script {
 					docker.withRegistry ('', 'myDockerHub') {
-					dockerImage.push()
-					dockerImage.push('latest') 
+					dockerImage.push();
+					dockerImage.push('latest') ;
 					}
 				}
 			}
