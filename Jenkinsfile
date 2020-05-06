@@ -32,7 +32,7 @@ pipeline {
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 				echo "BUILD_ID - $env.BUILD_ID"
-				echo "BUILD_TAG - $env.TAG"
+				echo "BUILD_TAG - $env.BUILD_TAG"
 				echo "BUILD_URL - $env.BUILD_URL"
 				}
 		}
@@ -43,15 +43,41 @@ pipeline {
 			}
 		}
 
-		stage ('Test') {
+		stage('Test') {
 			steps {
 				sh "mvn test" 
 			}
 		}
 
-		stage ('Integration Test') {
+		stage('Integration Test') {
 			steps {
 			 	sh "mvn failsafe:integration-test failsafe:verify"
+			}
+		}
+
+		stage('Package JAR') {
+			steps {
+			 	sh "mvn package -DskipTests"
+			}
+		}
+
+		stage('Build Docker Image'){
+			steps{
+				//docker build -t "rhyaam/azure-devops-kubernetes-terraform-pipeline:$env.BUILD_TAG"
+			script {
+				docker.build ("rhyaam/azure-devops-kubernetes-terraform-pipeline:{$env.BUILD_TAG}")
+				}
+			}
+		}
+		
+		stage('Push Docker Image'){
+			steps {
+				script {
+					docker.withRegistry ('', 'myDockerHub') {
+					dockerImage.push()
+					dockerImage.push('latest') 
+					}
+				}
 			}
 		}
 	}
